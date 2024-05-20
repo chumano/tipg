@@ -131,12 +131,18 @@ fetch('{{ response.tilejson_endpoint|safe }}')
     map.fitBounds(L.geoJSON(geo).getBounds());
 
     let layer = Object.values(data.vector_layers)[0];
+    const line = new protomapsL.LineSymbolizer({
+                color:"#000000"
+            })
+    const point = new protomapsL.CircleSymbolizer({
+          radius: 4,
+          fill: "red",
+          width: 1.5,
+      })
     let paintRules = [
         {
             dataLayer: layer.id,
-            symbolizer: new protomapsL.LineSymbolizer({
-                color:"#000000"
-            }),
+            symbolizer: point,
             minzoom: layer.minzoom,
             maxzoom: layer.maxzoom
         }
